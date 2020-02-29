@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ArrayList<String> items;
+    ArrayList<Contact> items;
     Context context;
 
-    MyRecyclerAdapter(ArrayList<String> items, Context context) {
+    MyRecyclerAdapter(ArrayList<Contact> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -46,11 +46,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //        Log.e("MyRecyclerAdapter", "Bind");
         if (holder instanceof SimpleViewHolder) {
             SimpleViewHolder sholder = ((SimpleViewHolder) holder);
-            sholder.textView.setText(items.get(position));
+            sholder.textView.setText(items.get(position).getName());
             sholder.setPosition(position);
         } else {
             CustomViewHolder cholder = ((CustomViewHolder) holder);
-            cholder.textView.setText(items.get(position));
+            cholder.textView.setText(items.get(position).getName());
         }
     }
 
@@ -78,6 +78,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 public void onClick(View v) {
                     Log.e("SimpleViewHolder", "item click");
                     Toast.makeText(context, "Item click " + position, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("contact", items.get(position));
+                    context.startActivity(intent);
                 }
             });
         }

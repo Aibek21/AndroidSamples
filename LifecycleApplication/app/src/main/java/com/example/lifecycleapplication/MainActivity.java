@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<String> items = new ArrayList<>();
+    ArrayList<Contact> items = new ArrayList<>();
 
 
     @Override
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         for (int i = 0; i < 100; i++)
-            items.add("Item " + i);
+            items.add(new Contact("Contact " + i, "87777777" + i));
 
         recyclerView = findViewById(R.id.recycler);
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(items, this);
