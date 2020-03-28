@@ -1,70 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/id_edit"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:hint="ID"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="Name" />
 
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/edit"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--         />-->
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Phone"
+        android:inputType="phone" />
+
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Save"
-        app:layout_constraintCircle="@+id/text"
-        app:layout_constraintCircleAngle="45"
-        app:layout_constraintCircleRadius="100dp" />
+        android:text="Save" />
 
     <Button
-        android:id="@+id/remove_button"
+        android:id="@+id/get_contacts_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Remove"
-        app:layout_constraintCircle="@+id/text"
-        app:layout_constraintCircleAngle="315"
-        app:layout_constraintCircleRadius="100dp" />
-
+        android:text="Get Contacts" />
 
     <Button
-        android:id="@+id/remove_button1"
+        android:id="@+id/update_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Remove"
-        app:layout_constraintCircle="@+id/text"
-        app:layout_constraintCircleAngle="135"
-        app:layout_constraintCircleRadius="100dp" />
-
+        android:text="Update" />
 
     <Button
-        android:id="@+id/remove_button2"
+        android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Remove"
-        app:layout_constraintCircle="@+id/text"
-        app:layout_constraintCircleAngle="225"
-        app:layout_constraintCircleRadius="100dp" />
+        android:text="Delete" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -13,11 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     String str = "Initial";
     Context mContext;
     SharedPreferences sharedPreferences;
+    AppDatabase db;
+    ContactDao contactDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mContext = this;
         sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
-
-        str = sharedPreferences.getString("my_string", "Initial");
-        Toast.makeText(mContext, str, Toast.LENGTH_LONG).show();
+        db = MyApplication.getInstance().getDatabase();
+        contactDao = db.contactDao();
+//        str = sharedPreferences.getString("my_string", "Initial");
+//        Toast.makeText(mContext, str, Toast.LENGTH_LONG).show();
 
 //        if (savedInstanceState != null) {
 //            str = savedInstanceState.getString("my_string");
@@ -35,25 +40,61 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         Button button = findViewById(R.id.save_button);
-        final EditText editText = findViewById(R.id.edit);
+        final EditText idEdit = findViewById(R.id.id_edit);
+        final EditText nameEdit = findViewById(R.id.name);
+        final EditText phoneEdit = findViewById(R.id.phone);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                str = editText.getText().toString();
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("my_string", str);
-                editor.apply();
+                String nameStr = nameEdit.getText().toString();
+                String phoneStr = phoneEdit.getText().toString();
+
+                Contact contact = new Contact();
+                contact.name = nameStr;
+                contact.phone = phoneStr;
+                contactDao.insert(contact);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("my_string", str);
+//                editor.apply();
             }
         });
 
 
-        Button remove_button = findViewById(R.id.remove_button);
+        Button remove_button = findViewById(R.id.get_contacts_button);
         remove_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("my_string");
-                editor.apply();
+                List<Contact> contacts = contactDao.getContacts();
+                for (Contact contact : contacts) {
+                    Log.e("Contact", contact.id + " " + contact.name + " " + contact.phone);
+                }
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.remove("my_string");
+//                editor.apply();
+            }
+        });
+
+
+        Button updateButton = findViewById(R.id.update_button);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = Integer.parseInt(idEdit.getText().toString());
+                Contact contact = contactDao.getContactById(id);
+                contact.name = nameEdit.getText().toString();
+                contact.phone = phoneEdit.getText().toString();
+                contactDao.update(contact);
+            }
+        });
+
+
+        Button deleteButton = findViewById(R.id.delete_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = Integer.parseInt(idEdit.getText().toString());
+                Contact contact = contactDao.getContactById(id);
+                contactDao.delete(contact);
             }
         });
     }
