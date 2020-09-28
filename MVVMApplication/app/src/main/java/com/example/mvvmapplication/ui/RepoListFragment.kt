@@ -9,15 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mvvmapplication.data.repository.RepoListRepository
 import com.example.mvvmapplication.databinding.FragmentRepoListBinding
 import com.example.mvvmapplication.ui.adapter.RepoListAdapter
 import com.example.mvvmapplication.viewmodel.RepoListViewModel
 import kotlinx.android.synthetic.main.fragment_repo_list.*
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepoListFragment : Fragment() {
 
     private lateinit var viewDataBinding: FragmentRepoListBinding
     private lateinit var adapter: RepoListAdapter
+    private val repoListViewModel: RepoListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,10 +30,10 @@ class RepoListFragment : Fragment() {
     ): View? {
 
         viewDataBinding = FragmentRepoListBinding.inflate(inflater, container, false).apply {
-            viewmodel =
-                ViewModelProviders.of(this@RepoListFragment).get(RepoListViewModel::class.java)
             setLifecycleOwner(viewLifecycleOwner)
         }
+
+        viewDataBinding.viewmodel = repoListViewModel
         return viewDataBinding.root
     }
 
