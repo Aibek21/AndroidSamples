@@ -5,6 +5,7 @@ import com.example.mvvmapplication.utils.Constants.Companion.BASE_URL
 import com.example.mvvmapplication.utils.Constants.Companion.DEBUG
 import com.example.mvvmapplication.utils.Constants.Companion.REQUEST_TIMEOUT_DURATION
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,6 +19,7 @@ object ApiClient {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build()
             .create(ApiService::class.java)
