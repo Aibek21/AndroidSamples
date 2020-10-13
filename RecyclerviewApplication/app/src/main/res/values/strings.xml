@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RecyclerviewApplication</string>
+    <string name="logout">Выйти</string>
+</resources>
