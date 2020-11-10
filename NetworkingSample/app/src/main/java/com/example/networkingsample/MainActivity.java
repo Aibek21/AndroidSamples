@@ -44,18 +44,18 @@ public class MainActivity extends AppCompatActivity {
                     .build();
 
             APIService service = retrofit.create(APIService.class);
-//
-//            service.getTodos().enqueue(new Callback<List<Todo>>() {
-//                @Override
-//                public void onResponse(Call<List<Todo>> call, Response<List<Todo>> response) {
-//                    Log.e("Response size: ", response.body().size() + "");
-//                }
-//
-//                @Override
-//                public void onFailure(Call<List<Todo>> call, Throwable t) {
-//                    Log.e("Error", t.getMessage());
-//                }
-//            });
+
+            service.getTodos().enqueue(new Callback<List<Todo>>() {
+                @Override
+                public void onResponse(Call<List<Todo>> call, Response<List<Todo>> response) {
+                    Log.e("Response size: ", response.body().size() + "");
+                }
+
+                @Override
+                public void onFailure(Call<List<Todo>> call, Throwable t) {
+                    Log.e("Error", t.getMessage());
+                }
+            });
 
 
 //            service.getTodoById(1).enqueue(new Callback<Todo>() {
