@@ -6,10 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import kotlinx.android.synthetic.main.fragment_second.*
 
 class SecondFragment : Fragment() {
 
+    val args: SecondFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,8 +38,14 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.e("SecondFragment", "onViewCreated")
-    }
+        Log.e("SecondFragmentArgs", args.todoId.toString())
 
+        go_to_third.setOnClickListener {
+            val bundle = bundleOf("amount" to "amount is 100")
+            it.findNavController().navigate(R.id.action_secondFragment_to_thirdFragment, bundle)
+//            (activity as MainActivity).changeFragment(2)
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

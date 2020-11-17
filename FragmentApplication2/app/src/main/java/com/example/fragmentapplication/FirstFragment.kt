@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
 
@@ -33,6 +35,11 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.e("FirstFragment", "onViewCreated")
+        go_to_second.setOnClickListener {
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment()
+            action.todoId = 123
+            it.findNavController().navigate(action)
+        }
     }
 
 
